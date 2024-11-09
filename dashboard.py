@@ -1,8 +1,9 @@
 from tkinter import*
 from PIL import Image,ImageTk #pip install pillow 
+from employee import employeeClass #Ques how to add files which are in same folder
+from supplier import supplierClass
 class IMS:
     def __init__(self,root):
-        pass
         self.root=root
         self.root.geometry("1350x700+0+0")  #0+0 define how much space you need from x and y axis when window pop up
         self.root.title("Inventory Management System |  Developed by BYTE ME")
@@ -19,7 +20,8 @@ class IMS:
         
 
         #===Clock===
-        self.lbl_clock=Label(self.root,text="Welcome to Inventory Management System\t\t Date: DD-MM-YYYY\t\t Time: HH-MM-SS",font=("times new roman",15,"italic"),bg="#4d636d",fg="white") #we have added lbl in clock because we will use this function again and we will configur it later
+        self.lbl_clock=Label(self.root,text="Welcome to Inventory Management System\t\t Date: DD-MM-YYYY\t\t Time: HH-MM-SS",font=("times new roman",15,"italic"),bg="#4d636d",fg="white") 
+        #we have added lbl in clock because we will use this function again and we will configur it later
         self.lbl_clock.place(x=0,y=70,relwidth=1,height=30)
         
 
@@ -29,7 +31,7 @@ class IMS:
         self.MenuLogo=ImageTk.PhotoImage(self.MenuLogo) # Not copied path as we do not know the path of the resized image
 
         LeftMenu=Frame(self.root,bd=10,relief=RIDGE,bg="grey")
-        LeftMenu.place(x=0,y=102,width=200,height=565)
+        LeftMenu.place(x=0,y=102,width=200,height=565) 
 
         lbl_menuLogo=Label(LeftMenu,image=self.MenuLogo)
         lbl_menuLogo.pack(side=TOP,fill=X)
@@ -39,8 +41,8 @@ class IMS:
         self.icon_side=PhotoImage(file="IMS/images/side.png")
 
         btn_menu=Label(LeftMenu,text="Menu",font=("times new roman",20,"bold"),bg="#009688").pack(side=TOP,fill=X)
-        btn_employee=Button(LeftMenu,text="Employee",image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
-        btn_supplier=Button(LeftMenu,text="Supplier",image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
+        btn_employee=Button(LeftMenu,text="Employee",command=self.employee,image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
+        btn_supplier=Button(LeftMenu,text="Supplier",command=self.supplier,image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
         btn_category=Button(LeftMenu,text="Category",image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
         btn_product=Button(LeftMenu,text="Product",image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
         btn_sales=Button(LeftMenu,text="Sales",image=self.icon_side,compound=LEFT,padx=5,anchor="w",font=("times new roman",20,"bold"),bg="white",bd=3,cursor="hand2").pack(side=TOP,fill=X)
@@ -66,10 +68,20 @@ class IMS:
 
         #===Footer===  
         lbl_footer=Label(self.root,text="IMS-Inventory Management System | Devloped by BYTE ME\n For any Technical Issue Contact: *84******42",font=("times new roman",10,"italic"),bg="#4d636d",fg="white").pack(side=BOTTOM,fill=X)
-      
+#===================================================================================================================    
+
+    def employee(self):
+        self.new_win=Toplevel(self.root)
+        self.new_obj=employeeClass(self.new_win)
+    
+    def supplier(self):
+        self.new_win=Toplevel(self.root)
+        self.new_obj=supplierClass(self.new_win)
 
 
 
-root=Tk()
-obj=IMS(root)
-root.mainloop() #Hepls window stay. Else it will execute and exit
+
+if __name__=="__main__":
+    root=Tk()
+    obj=IMS(root)
+    root.mainloop() #Hepls window stay. Else it will execute and exit
